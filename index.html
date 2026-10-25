@@ -1,0 +1,816 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Wahaj Software Solutions</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Montserrat:wght@600;700;800&display=swap">
+<style>
+/* Layout concept: airy light-blue canvas like the Wahaj ads; floating pastel cards, one big animated hero scene, soft motion everywhere. */
+:root{
+  color-scheme:light;
+  --bg:#F2FBFE; --bg-2:#E4F4FB; --card:#FFFFFF;
+  --ink:#1D4478; --muted:#56728F; --line:#CFE8F4;
+  --sky:#45B8EC; --sky-2:#8AD4F4; --sky-soft:#D6EFFB;
+  --btn:#1583BF; --btn-2:#2FA3DC;
+  --mint:#CDF1E7; --lilac:#E4E9FF; --peach:#FFE9DB; --lemon:#FFF6C9;
+  --f-d:'Montserrat','Cairo',system-ui,sans-serif;
+  --f-b:'Cairo','Montserrat',system-ui,sans-serif;
+  --sh:0 14px 40px rgba(69,184,236,.18);
+  --sh-s:0 6px 18px rgba(69,184,236,.14);
+  --sx:-50%;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 1rem/1.75 var(--f-b);-webkit-text-size-adjust:100%}
+main{overflow-x:clip}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--f-d);text-wrap:balance;line-height:1.3}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--sky);outline-offset:3px;border-radius:8px}
+.ico{width:1em;height:1em;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.wrap{max-width:1180px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.sec{padding-block:clamp(56px,9vw,104px);position:relative}
+.sec.alt{background:linear-gradient(180deg,var(--bg-2),var(--bg))}
+.eyebrow{display:inline-flex;align-items:center;gap:.5em;padding:.3em 1em;border-radius:999px;background:var(--sky-soft);color:var(--btn);font-weight:700;font-size:.9rem}
+.eyebrow::before{content:"";width:.5em;height:.5em;border-radius:50%;background:var(--sky);animation:pulse 2s infinite}
+.sh{display:grid;gap:14px;justify-items:center;text-align:center;max-width:720px;margin:0 auto clamp(32px,5vw,56px)}
+.sh h2{font-size:clamp(1.6rem,4.4vw,2.6rem);font-weight:800}
+.sh p{color:var(--muted);font-size:1.05rem}
+
+/* header */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:rgba(242,251,254,.92)}
+.hd{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:rgba(242,251,254,.82);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.hd .wrap{display:flex;align-items:center;gap:14px;min-height:68px}
+.logo{display:flex;align-items:center;gap:10px;font-family:var(--f-d);font-weight:800;color:var(--sky);letter-spacing:.02em;line-height:1.1}
+.logo svg{width:42px;height:42px;overflow:visible}
+.logo small{display:block;font-size:.58rem;font-weight:600;color:var(--muted);letter-spacing:.14em;text-transform:uppercase}
+.logo b{font-size:1.3rem}
+.nav{display:flex;gap:4px;margin-inline-start:auto}
+.nav a{padding:.45em .9em;border-radius:999px;font-weight:600;color:var(--muted);transition:.25s}
+.nav a:hover{background:var(--sky-soft);color:var(--btn)}
+.hd-act{display:flex;align-items:center;gap:10px}
+.lang{border:1.5px solid var(--line);background:#fff;border-radius:999px;padding:.35em .9em;font-weight:700;color:var(--btn);transition:.25s}
+.lang:hover{border-color:var(--sky);transform:translateY(-2px)}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1.5px solid var(--line);background:#fff;align-items:center;justify-content:center;font-size:1.3rem;color:var(--btn)}
+.bar{position:absolute;inset:auto 0 -1px 0;height:3px;background:linear-gradient(90deg,var(--sky),var(--sky-2),#9ADFCB);transform:scaleX(var(--sp,0));transform-origin:left}
+:root[dir="rtl"] .bar{transform-origin:right}
+
+/* buttons */
+.btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:.6em;padding:.8em 1.5em;border-radius:999px;border:0;font-weight:700;font-size:1rem;transition:transform .25s,box-shadow .25s}
+.btn .ico{font-size:1.2em}
+.btn.p{background:linear-gradient(135deg,var(--btn),var(--btn-2));color:#fff;box-shadow:0 10px 24px rgba(21,131,191,.28)}
+.btn.g{background:#fff;color:var(--btn);border:1.5px solid var(--line)}
+.btn:hover{transform:translateY(-3px)}
+.btn.p:hover{box-shadow:0 16px 30px rgba(21,131,191,.34)}
+.btn::after{content:"";position:absolute;inset:0;background:linear-gradient(105deg,transparent 35%,rgba(255,255,255,.55) 50%,transparent 65%);transform:translateX(-130%)}
+.btn:hover::after{transform:translateX(130%);transition:transform .7s}
+.btn.sm{padding:.55em 1.1em;font-size:.95rem}
+
+/* hero */
+.hero{padding-block:clamp(28px,6vw,72px) clamp(40px,7vw,84px);background:radial-gradient(circle at var(--mx,70%) var(--my,20%),rgba(138,212,244,.35),transparent 42%),var(--bg)}
+.hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(var(--line) 1.4px,transparent 1.4px);background-size:26px 26px;opacity:.65;mask-image:linear-gradient(180deg,#000,transparent 85%);-webkit-mask-image:linear-gradient(180deg,#000,transparent 85%)}
+.hero-g{position:relative;display:grid;gap:36px;align-items:center;grid-template-columns:1.02fr .98fr}
+.hero-g>*{min-width:0}
+.hero h1{font-size:clamp(2rem,5.6vw,3.7rem);font-weight:800;margin-block:16px 18px;line-height:1.35}
+.rot{color:var(--btn);background:linear-gradient(transparent 62%,var(--sky-soft) 62%);padding-inline:.15em}
+.caret{display:inline-block;width:3px;height:1em;background:var(--sky);vertical-align:-.12em;margin-inline-start:2px;animation:blink 1s steps(1) infinite}
+.grad{display:block;background:linear-gradient(100deg,var(--sky),#5BC8B0 60%,var(--sky));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 6s linear infinite}
+.hero p.lead{font-size:clamp(1rem,2.2vw,1.2rem);color:var(--muted);max-width:34em}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.mini-badges{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.mini-badges>span{display:inline-flex;align-items:center;gap:.5em;padding:.4em .95em;border-radius:14px;background:#fff;border:1px solid var(--line);font-weight:600;font-size:.92rem;box-shadow:var(--sh-s);color:var(--muted)}
+.mini-badges .ico{color:var(--sky);font-size:1.15em}
+[data-in]{animation:rise .8s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0ms)}
+
+.hv{position:relative;min-height:clamp(330px,46vw,470px);--px:0;--py:0}
+.blob{position:absolute;filter:blur(2px);opacity:.75;animation:morph 11s ease-in-out infinite}
+.b1{inset:6% 10% 10% 6%;background:linear-gradient(135deg,var(--sky-soft),var(--mint))}
+.b2{width:44%;aspect-ratio:1;inset-inline-end:0;top:0;background:var(--lilac);animation-duration:14s;animation-direction:reverse}
+.b3{width:34%;aspect-ratio:1;inset-inline-start:0;bottom:0;background:var(--peach);animation-duration:9s}
+.win{position:absolute;inset:11% 6% 13%;background:#fff;border-radius:22px;border:1px solid var(--line);box-shadow:var(--sh);overflow:hidden;translate:calc(var(--px)*8px) calc(var(--py)*8px);animation:bob 7s ease-in-out infinite}
+.win-bar{display:flex;align-items:center;gap:6px;padding:10px 14px;background:var(--bg-2);border-bottom:1px solid var(--line)}
+.win-bar i{width:10px;height:10px;border-radius:50%;background:var(--sky-2)}
+.win-bar i:nth-child(2){background:#9ADFCB}.win-bar i:nth-child(3){background:#FFD6B5}
+.win-bar span{margin-inline-start:auto;font:600 .72rem var(--f-d);color:var(--muted);background:#fff;padding:2px 12px;border-radius:99px}
+.win-body{display:grid;gap:10px;padding:14px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tiles div{height:44px;border-radius:12px;background:linear-gradient(100deg,var(--sky-soft) 30%,#fff 50%,var(--sky-soft) 70%);background-size:220% 100%;animation:shimmer 2.6s linear infinite}
+.tiles div:nth-child(2){background-image:linear-gradient(100deg,var(--mint) 30%,#fff 50%,var(--mint) 70%);background-size:220% 100%;animation-delay:.4s}
+.tiles div:nth-child(3){background-image:linear-gradient(100deg,var(--lilac) 30%,#fff 50%,var(--lilac) 70%);background-size:220% 100%;animation-delay:.8s}
+.win svg.ln{width:100%;height:auto;display:block}
+.area{fill:var(--sky-soft);opacity:.8;animation:fadein 1.4s .6s both}
+.stroke{fill:none;stroke:var(--sky);stroke-width:3;stroke-linecap:round;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 2.4s .4s ease-out forwards}
+.bars{display:flex;align-items:flex-end;gap:7px;height:56px}
+.bars b{flex:1;height:var(--h);border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,var(--sky-2),var(--sky));transform-origin:bottom;animation:grow 1.2s var(--bd,0s) cubic-bezier(.2,.8,.2,1) both,breathe 3.6s calc(var(--bd,0s) + 1.4s) ease-in-out infinite}
+.fl{position:absolute;display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);font:700 .85rem var(--f-d);color:var(--ink);translate:calc(var(--px)*var(--k)*1px) calc(var(--py)*var(--k)*1px);animation:bob var(--bt,6s) ease-in-out infinite;animation-delay:var(--bdl,0s)}
+.fl .ico{font-size:1.6rem;color:var(--sky)}
+.fl small{display:block;font:600 .68rem var(--f-b);color:var(--muted);line-height:1.2}
+.f1{top:2%;inset-inline-start:2%;--k:22}
+.f2{top:4%;inset-inline-end:0;--k:-18;--bt:7s;--bdl:-2s}
+.f3{bottom:22%;inset-inline-start:-1%;--k:-26;--bt:5.5s;--bdl:-1s}
+.f4{bottom:3%;inset-inline-end:6%;--k:30;--bt:6.5s;--bdl:-3s}
+.f5{bottom:44%;inset-inline-end:-2%;--k:16;--bt:8s;--bdl:-4s;background:var(--mint)}
+.f5 .ico{color:#2f9b7e}
+.sp{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.sp i{position:absolute;width:var(--s);height:var(--s);background:var(--sky-2);clip-path:polygon(50% 0,62% 38%,100% 50%,62% 62%,50% 100%,38% 62%,0 50%,38% 38%);opacity:0;animation:twinkle var(--t) var(--dl) ease-in-out infinite}
+
+/* marquee */
+.mq{direction:ltr;overflow:hidden;padding-block:18px;background:#fff;border-block:1px solid var(--line)}
+.mq-t{display:flex;gap:14px;width:max-content;animation:marquee 34s linear infinite}
+.mq:hover .mq-t{animation-play-state:paused}
+.mq span{padding:.45em 1.2em;border-radius:999px;background:var(--bg);border:1px solid var(--line);font:700 .95rem var(--f-d);color:var(--muted);white-space:nowrap;transition:.3s}
+.mq span:hover{background:var(--sky-soft);color:var(--btn);transform:translateY(-3px)}
+
+/* reveal */
+.js .rv{opacity:.3;translate:0 34px;scale:.98;transition:opacity .8s cubic-bezier(.2,.8,.2,1),translate .8s cubic-bezier(.2,.8,.2,1),scale .8s cubic-bezier(.2,.8,.2,1);transition-delay:var(--d,0ms)}
+.js .rv.in{opacity:1;translate:none;scale:none}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.stat{padding:26px 18px;border-radius:26px;text-align:center;background:var(--c,var(--sky-soft));transition:transform .35s}
+.stat:hover{transform:translateY(-8px) rotate(-1deg)}
+.stat strong{display:block;font:800 clamp(2rem,5vw,3rem)/1.2 var(--f-d);color:var(--ink);font-variant-numeric:tabular-nums}
+.stat span{color:var(--muted);font-weight:600}
+
+/* services */
+.filters{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:28px}
+.fb{padding:.55em 1.3em;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:700;color:var(--muted);transition:.25s}
+.fb:hover{transform:translateY(-3px);border-color:var(--sky)}
+.fb.on{background:linear-gradient(135deg,var(--btn),var(--btn-2));color:#fff;border-color:transparent;box-shadow:0 8px 20px rgba(21,131,191,.25)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.cw{min-width:0;perspective:900px}
+.cw.pp{animation:pop .5s cubic-bezier(.2,.8,.2,1) both}
+.card{height:100%;display:flex;flex-direction:column;gap:12px;padding:26px;border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh-s);transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s,box-shadow .3s,border-color .3s;position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;inset:auto -30% -55% auto;width:70%;aspect-ratio:1;border-radius:50%;background:var(--t);opacity:.55;transition:transform .6s}
+.card:hover{box-shadow:var(--sh);border-color:var(--sky-2)}
+.card:hover::before{transform:scale(1.7)}
+.card>*{position:relative}
+.ic{width:62px;height:62px;border-radius:20px;background:var(--t);display:grid;place-items:center;font-size:2rem;color:var(--btn);transition:transform .5s}
+.card:hover .ic{transform:rotate(-8deg) scale(1.12)}
+.card h3{font-size:1.15rem;font-weight:800}
+.card p{color:var(--muted);font-size:.97rem;flex:1}
+.pick{align-self:flex-start;display:inline-flex;align-items:center;gap:.5em;padding:.45em 1em;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:700;color:var(--btn);transition:.25s}
+.pick:hover{background:var(--btn);color:#fff;border-color:var(--btn);gap:.9em}
+:root[dir="rtl"] .arr{transform:scaleX(-1)}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;counter-reset:s}
+.st{position:relative;text-align:center;padding-inline:8px}
+.st .n{position:relative;margin:0 auto 14px;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;font:800 1.2rem var(--f-d);background:#fff;border:3px solid var(--sky);color:var(--btn);z-index:1}
+.st .n::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--sky-2);opacity:0;animation:ring 2.6s var(--d,0ms) infinite}
+.st::before,.st::after{content:"";position:absolute;top:26px;height:4px;border-radius:4px;inset-inline-start:calc(50% + 34px);width:calc(100% - 68px)}
+.st::before{background:var(--line)}
+.st::after{background:linear-gradient(90deg,var(--sky),var(--sky-2));transform:scaleX(0);transform-origin:left;transition:transform 1s .5s}
+:root[dir="rtl"] .st::after{transform-origin:right}
+.st.in::after{transform:scaleX(1)}
+.st:last-child::before,.st:last-child::after{display:none}
+.st h3{font-size:1.02rem;font-weight:800;margin-bottom:6px}
+.st p{font-size:.92rem;color:var(--muted)}
+
+/* showcase */
+.tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-bottom:22px}
+.tab{position:relative;overflow:hidden;padding:.6em 1.3em;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:700;color:var(--muted);transition:.25s}
+.tab.on{color:var(--btn);border-color:var(--sky);background:var(--sky-soft)}
+.tab.on::after{content:"";position:absolute;inset:auto 0 0 0;height:3px;background:var(--sky);transform:scaleX(0);transform-origin:left;animation:fill 7s linear forwards}
+:root[dir="rtl"] .tab.on::after{transform-origin:right}
+.stage{max-width:880px;margin-inline:auto;background:#fff;border:1px solid var(--line);border-radius:30px;box-shadow:var(--sh);padding:clamp(14px,3vw,26px);min-height:360px;position:relative;overflow:hidden}
+.stage:hover .tab.on::after,.tabs:hover .tab.on::after{animation-play-state:paused}
+.pn{animation:pop .6s cubic-bezier(.2,.8,.2,1) both}
+.mk-h{display:flex;align-items:center;gap:10px;margin-bottom:14px;font-weight:800}
+.mk-h .dot{width:12px;height:12px;border-radius:50%;background:#7bd8b5;animation:pulse 2s infinite}
+.pill{margin-inline-start:auto;padding:.1em .8em;border-radius:99px;background:var(--lemon);font-size:.78rem;font-weight:700;color:#8a6d00}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.tile{padding:12px 14px;border-radius:16px;background:var(--bg);border:1px solid var(--line)}
+.tile small{display:block;color:var(--muted);font-weight:600;font-size:.8rem}
+.tile strong{font:800 1.4rem var(--f-d)}
+.tile i{font-style:normal;font-weight:700;font-size:.8rem;color:#2f9b7e;margin-inline-start:6px}
+.g2{display:grid;grid-template-columns:1.6fr 1fr;gap:12px}
+.g2>*{min-width:0}
+.box{border-radius:18px;background:var(--bg);border:1px solid var(--line);padding:12px}
+.box svg{width:100%;height:auto;display:block}
+.dn circle{fill:none;stroke-width:5}
+.dn .bg{stroke:var(--line)}
+.dn .sg{stroke-linecap:butt;animation:seg 1.4s .2s ease-out both}
+.dn{transform:rotate(-90deg);max-width:150px;margin:auto}
+.prods{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.prod{border-radius:18px;border:1px solid var(--line);padding:10px;background:var(--bg);animation:rise .6s var(--d,0s) both;transition:transform .3s}
+.prod:hover{transform:translateY(-6px)}
+.prod .im{aspect-ratio:1;border-radius:14px;background:var(--c);display:grid;place-items:center;font-size:2.4rem;color:var(--btn);animation:bob 4s var(--d,0s) ease-in-out infinite}
+.prod b{display:block;margin-top:8px;font-size:.88rem}
+.prod .pr{display:flex;align-items:center;justify-content:space-between;font-weight:800;color:var(--btn)}
+.prod .ad{width:30px;height:30px;border-radius:50%;background:var(--btn);color:#fff;display:grid;place-items:center;font-size:1rem}
+.cartb{display:flex;align-items:center;gap:10px;margin-top:14px;padding:10px 14px;border-radius:16px;background:var(--mint);font-weight:700}
+.cartb .bd{margin-inline-start:auto;min-width:28px;text-align:center;border-radius:99px;background:#2f9b7e;color:#fff;animation:badge 2.4s infinite}
+.phones{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center}
+.phone{width:200px;border:7px solid var(--sky);border-radius:34px;padding:14px 12px;background:#fff;display:grid;gap:10px;animation:bob 6s ease-in-out infinite}
+.phone .r{display:flex;align-items:center;gap:10px;height:42px;padding:6px 8px;border-radius:12px;background:var(--bg)}
+.phone .r i{width:28px;height:28px;border-radius:9px;background:var(--c)}
+.phone .r s{flex:1;height:8px;border-radius:6px;background:linear-gradient(100deg,var(--line) 30%,#fff 50%,var(--line) 70%);background-size:220% 100%;animation:shimmer 2.2s linear infinite;text-decoration:none}
+.phone .hd2{height:70px;border-radius:16px;background:linear-gradient(135deg,var(--sky-2),var(--mint));animation:shimmer 3s linear infinite;background-size:200% 100%}
+.nt{padding:10px 14px;border-radius:16px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh-s);font-weight:700;font-size:.88rem;animation:bob 5s var(--d,0s) ease-in-out infinite}
+.nt small{display:block;color:var(--muted);font-weight:600}
+.erp svg{width:100%;height:auto;display:block}
+.erp .ln2{stroke:var(--sky-2);stroke-width:2.4;stroke-dasharray:6 8;animation:dash 1.4s linear infinite}
+.erp .nd{fill:#fff;stroke:var(--sky);stroke-width:2.4}
+.erp .hub{fill:var(--sky-soft);stroke:var(--sky);stroke-width:3;transform-box:fill-box;transform-origin:center;animation:pulsesvg 2.4s ease-in-out infinite}
+.erp text{font:700 13px var(--f-b);fill:var(--ink);text-anchor:middle}
+.erp .ht{font:800 16px var(--f-d);fill:var(--btn)}
+
+/* why */
+.why{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.wy{display:flex;gap:16px;padding:22px;border-radius:24px;background:#fff;border:1px solid var(--line);transition:transform .35s,box-shadow .35s;min-width:0}
+.wy:hover{transform:translateY(-8px);box-shadow:var(--sh)}
+.wy .ic{width:52px;height:52px;border-radius:16px;font-size:1.6rem;flex:none}
+.wy h3{font-size:1.05rem;font-weight:800;margin-bottom:4px}
+.wy p{color:var(--muted);font-size:.95rem}
+
+/* faq */
+.faq{max-width:780px;margin-inline:auto;display:grid;gap:12px}
+.qa{border-radius:20px;background:#fff;border:1px solid var(--line);overflow:hidden;transition:box-shadow .3s,border-color .3s}
+.qa.on{box-shadow:var(--sh);border-color:var(--sky-2)}
+.qa>button{width:100%;display:flex;align-items:center;gap:12px;padding:18px 22px;background:none;border:0;text-align:start;font-weight:800;font-size:1.05rem}
+.qa .pl{margin-inline-start:auto;width:30px;height:30px;border-radius:50%;background:var(--sky-soft);display:grid;place-items:center;color:var(--btn);transition:transform .4s}
+.qa.on .pl{transform:rotate(135deg);background:var(--btn);color:#fff}
+.an{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s}
+.qa.on .an{grid-template-rows:1fr}
+.an>div{overflow:hidden}
+.an p{padding:0 22px 20px;color:var(--muted)}
+
+/* contact */
+.ct{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;align-items:stretch}
+.ct>*{min-width:0}
+.info{position:relative;overflow:hidden;padding:clamp(24px,4vw,38px);border-radius:30px;background:linear-gradient(150deg,var(--sky-soft),var(--mint));display:flex;flex-direction:column;gap:18px}
+.info h2{font-size:clamp(1.5rem,3.6vw,2.1rem);font-weight:800}
+.info p{color:var(--muted)}
+.num{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:12px 16px;border-radius:18px;background:#fff;font:800 1.15rem var(--f-d);direction:ltr;width:fit-content;max-width:100%}
+.num .ico{color:#2f9b7e;font-size:1.5rem}
+.cp{border:1.5px solid var(--line);background:var(--bg);border-radius:99px;padding:.15em .9em;font:700 .85rem var(--f-b);color:var(--btn)}
+.chk{display:grid;gap:8px;font-weight:600}
+.chk div{display:flex;gap:10px;align-items:center}
+.chk .ico{color:#2f9b7e;font-size:1.25rem}
+.orb{position:absolute;border-radius:50%;background:rgba(255,255,255,.6);animation:bob 8s ease-in-out infinite}
+.o1{width:140px;height:140px;inset-inline-end:-40px;bottom:-40px}
+.o2{width:70px;height:70px;inset-inline-end:60px;top:20px;animation-duration:6s}
+.form{padding:clamp(22px,4vw,34px);border-radius:30px;background:#fff;border:1px solid var(--line);box-shadow:var(--sh);display:grid;gap:16px;align-content:start}
+.form label.t{display:block;font-weight:800;margin-bottom:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:.35em .95em;border-radius:99px;border:1.5px solid var(--line);background:var(--bg);font-weight:600;font-size:.9rem;color:var(--muted);transition:.25s}
+.chip:hover{transform:translateY(-2px);border-color:var(--sky)}
+.chip[aria-pressed="true"]{background:var(--sky-soft);border-color:var(--sky);color:var(--btn);animation:badge .5s}
+.fld{width:100%;padding:.8em 1em;border-radius:16px;border:1.5px solid var(--line);background:var(--bg);font:inherit;color:var(--ink);transition:border-color .25s,box-shadow .25s}
+.fld:focus{outline:none;border-color:var(--sky);box-shadow:0 0 0 4px rgba(69,184,236,.2);background:#fff}
+.fld.bad{border-color:#F2A7A7;animation:shake .4s}
+textarea.fld{min-height:96px;resize:vertical}
+.pv{padding:14px 16px;border-radius:18px 18px 18px 6px;background:var(--mint);font-size:.92rem;color:#245a49;white-space:pre-line;word-break:break-word;animation:pop .4s both}
+:root[dir="rtl"] .pv{border-radius:18px 18px 6px 18px}
+.hint{font-size:.85rem;color:var(--muted)}
+
+/* footer */
+.ft{background:var(--bg-2);padding-block:36px;padding-bottom:calc(36px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line)}
+.ft .wrap{display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:space-between}
+.ft p{color:var(--muted);font-size:.9rem}
+
+/* floating */
+.wa{position:fixed;z-index:40;inset-block-end:calc(18px + env(safe-area-inset-bottom,0px));inset-inline-end:max(16px,env(safe-area-inset-right,0px),env(safe-area-inset-left,0px));width:58px;height:58px;border-radius:50%;background:linear-gradient(135deg,#46c79f,#2fa3dc);color:#fff;display:grid;place-items:center;font-size:1.9rem;box-shadow:0 10px 26px rgba(47,163,220,.4);transition:transform .25s}
+.wa::before{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid #46c79f;animation:ring 2.2s infinite}
+.wa:hover{transform:scale(1.1) rotate(-6deg)}
+.toast{position:fixed;z-index:70;inset-inline:0;margin-inline:auto;width:max-content;max-width:calc(100% - 32px);inset-block-end:calc(90px + env(safe-area-inset-bottom,0px));padding:.6em 1.3em;border-radius:99px;background:var(--ink);color:#fff;font-weight:700;opacity:0;transform:translateY(20px);pointer-events:none;transition:.35s}
+.toast.on{opacity:1;transform:none}
+
+/* keyframes */
+@keyframes rise{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:scale(.92) translateY(14px)}to{opacity:1;transform:none}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes morph{0%,100%{border-radius:60% 40% 55% 45%/50% 55% 45% 50%;transform:rotate(0)}50%{border-radius:40% 60% 45% 55%/55% 45% 55% 45%;transform:rotate(14deg)}}
+@keyframes blink{50%{opacity:0}}
+@keyframes flow{to{background-position:200% 0}}
+@keyframes pulse{50%{transform:scale(1.5);opacity:.5}}
+@keyframes shimmer{to{background-position:-220% 0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fadein{from{opacity:0}}
+@keyframes grow{from{transform:scaleY(0)}}
+@keyframes breathe{50%{transform:scaleY(.82)}}
+@keyframes twinkle{0%,100%{opacity:0;transform:scale(.3) rotate(0)}50%{opacity:.9;transform:scale(1) rotate(90deg)}}
+@keyframes marquee{to{transform:translateX(var(--sx))}}
+@keyframes ring{0%{transform:scale(.9);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+@keyframes fill{to{transform:scaleX(1)}}
+@keyframes seg{from{stroke-dasharray:0 100}}
+@keyframes badge{0%,100%{transform:scale(1)}20%{transform:scale(1.35)}40%{transform:scale(1)}}
+@keyframes dash{to{stroke-dashoffset:-28}}
+@keyframes pulsesvg{50%{transform:scale(1.08)}}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+
+/* responsive */
+@media (max-width:1020px){
+  .grid,.why{grid-template-columns:repeat(2,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .prods{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:900px){
+  .nav{position:absolute;inset:100% 0 auto 0;margin:0;flex-direction:column;padding:12px max(16px,env(safe-area-inset-right,0px)) 18px max(16px,env(safe-area-inset-left,0px));background:rgba(242,251,254,.97);border-bottom:1px solid var(--line);display:none;box-shadow:var(--sh)}
+  .nav.open{display:flex;animation:pop .3s both}
+  .nav a{padding:.8em 1em}
+  .burger{display:inline-flex}
+  .hd-act{margin-inline-start:auto}
+  .hero-g,.ct{grid-template-columns:1fr}
+  .hv{order:2}
+  .steps{grid-template-columns:1fr;gap:6px}
+  .st{display:grid;grid-template-columns:54px 1fr;gap:6px 16px;text-align:start;padding:0 0 22px}
+  .st .n{margin:0;grid-row:1/3}
+  .st::before,.st::after{top:58px;bottom:0;height:auto;width:4px;inset-inline-start:25px}
+  .st::after{transform:scaleY(0);transform-origin:top;background:linear-gradient(180deg,var(--sky),var(--sky-2))}
+  :root[dir="rtl"] .st::after{transform-origin:top}
+  .st.in::after{transform:scaleY(1)}
+  .st h3{margin:0}
+  .phones{grid-template-columns:1fr;justify-items:center}
+}
+@media (max-width:620px){
+  .grid,.why,.g2,.g3{grid-template-columns:1fr}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .tile strong{font-size:1.1rem}
+  .tile i{display:none}
+  .stats{gap:10px}
+  .stat{padding:20px 8px}
+  .logo small{display:none}
+  .lang{padding:.3em .8em}
+  .hd .wrap{gap:8px}
+  .cta .btn{flex:1 1 100%}
+  .f3,.f5{display:none}
+  .win{inset:12% 3% 14%}
+  .prods{gap:8px}
+}
+@media (max-width:380px){.logo b{font-size:1.1rem}.logo svg{width:34px;height:34px}.g3{gap:6px}}
+@media (hover:none){.card{transform:none!important}}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;animation-delay:0s!important;transition-duration:.001ms!important}
+  .js .rv{opacity:1;translate:none;scale:none}
+  .stroke{stroke-dashoffset:0}
+}
+</style>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-core" viewBox="0 0 48 48"><rect x="8" y="9" width="32" height="23" rx="3"/><path d="M3 38h42M19 16l-4 4.5 4 4.5M29 16l4 4.5-4 4.5M25 15l-2 11"/></symbol>
+    <symbol id="i-web" viewBox="0 0 48 48"><rect x="5" y="8" width="38" height="30" rx="4"/><path d="M5 16h38M13 29l7-7 5 5 9-10M29 17h5v5"/></symbol>
+    <symbol id="i-uiux" viewBox="0 0 48 48"><rect x="11" y="4" width="26" height="40" rx="5"/><rect x="16" y="11" width="16" height="10" rx="2"/><path d="M16 27h16M16 32h10"/><circle cx="24" cy="39" r="1.2"/></symbol>
+    <symbol id="i-erp" viewBox="0 0 48 48"><circle cx="24" cy="24" r="6"/><circle cx="8" cy="10" r="3.5"/><circle cx="40" cy="10" r="3.5"/><circle cx="8" cy="38" r="3.5"/><circle cx="40" cy="38" r="3.5"/><path d="M11 12l8 8M37 12l-8 8M11 36l8-8M37 36l-8-8"/></symbol>
+    <symbol id="i-secure" viewBox="0 0 48 48"><path d="M24 4l16 6v12c0 10-7 17-16 21C15 39 8 32 8 22V10z"/><rect x="17" y="22" width="14" height="11" rx="2.5"/><path d="M20 22v-3a4 4 0 018 0v3"/></symbol>
+    <symbol id="i-analytics" viewBox="0 0 48 48"><path d="M11 41V29M24 41V21M37 41V25M6 41h36M8 18l9-6 8 5 15-11M33 6h7v7"/></symbol>
+    <symbol id="i-ecom" viewBox="0 0 48 48"><path d="M5 8h6l5 22h22l4-15H14"/><circle cx="19" cy="38" r="3"/><circle cx="34" cy="38" r="3"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 48 48"><path d="M13 37a9 9 0 01-1-18 12 12 0 0123-3 10 10 0 012 21z"/><path d="M19 28h10M24 24v8"/></symbol>
+    <symbol id="i-ai" viewBox="0 0 48 48"><rect x="13" y="13" width="22" height="22" rx="5"/><path d="M19 7v6M29 7v6M19 35v6M29 35v6M7 19h6M7 29h6M35 19h6M35 29h6M19.5 29l4.5-9 4.5 9M21.3 26h5.4"/></symbol>
+    <symbol id="i-support" viewBox="0 0 48 48"><path d="M9 28v-5a15 15 0 0130 0v5"/><rect x="6" y="26" width="8" height="12" rx="3"/><rect x="34" y="26" width="8" height="12" rx="3"/><path d="M38 38c0 4-4 5-9 5h-4"/></symbol>
+    <symbol id="i-wa" viewBox="0 0 48 48"><path d="M24 5a19 19 0 00-16.4 28.6L5 43l9.7-2.5A19 19 0 1024 5z"/><path d="M17.5 16c.2 5.5 5.5 11.5 12.5 13l3.2-3.2-4.2-2.2-2.2 1.7c-2.2-1-4.2-3-5.2-5.2l1.7-2.2-2.2-4.2z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M7.5 12.5l3 3 6-6.5"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-pal" viewBox="0 0 24 24"><path d="M12 3a9 9 0 100 18c1.5 0 2-1 1.5-2s-.5-2 1-2H17a4 4 0 004-4c0-5-4-10-9-10z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="3"/><path d="M11 18.5h2"/></symbol>
+    <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><circle cx="6" cy="12" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="18" cy="18" r="2.5"/><path d="M8.2 10.8l7.6-3.6M8.2 13.2l7.6 3.6"/></symbol>
+  </defs>
+</svg>
+
+<header class="hd">
+  <div class="wrap">
+    <a class="logo" href="#home" aria-label="Wahaj Software Solutions">
+      <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l8 26 7-16 7 16 8-22"/><path d="M36 9l2 4 4 1-4 1.5-2 4-1.6-4-4-1.5 4-1z" stroke-width="2" fill="#8AD4F4"/></svg>
+      <span><b data-ar="وهج" data-en="WAHAJ"></b><small>Software Solutions</small></span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#services" data-ar="خدماتنا" data-en="Services"></a>
+      <a href="#process" data-ar="طريقة الشغل" data-en="How we work"></a>
+      <a href="#work" data-ar="أمثلة" data-en="Samples"></a>
+      <a href="#why" data-ar="ليه وهج" data-en="Why Wahaj"></a>
+      <a href="#faq" data-ar="أسئلة" data-en="FAQ"></a>
+      <a href="#contact" data-ar="تواصل" data-en="Contact"></a>
+    </nav>
+    <div class="hd-act">
+      <button class="lang" id="lang" type="button" aria-label="Language"></button>
+      <a class="btn p sm" id="hdcta" href="#contact" data-ar="اطلب عرض سعر" data-en="Get a quote"></a>
+      <button class="burger" id="burger" type="button" aria-label="Menu" aria-expanded="false"><svg class="ico" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+    <div class="bar" id="bar"></div>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero sec" style="padding-block:clamp(28px,6vw,72px) clamp(40px,7vw,84px)">
+    <div class="sp" id="sp1"></div>
+    <div class="wrap hero-g">
+      <div>
+        <span class="eyebrow" data-in style="--d:0ms" data-ar="شركة برمجيات · حلول تكبّر شغلك" data-en="Software company · solutions that grow your business"></span>
+        <h1 data-in style="--d:120ms">
+          <span data-ar="محتاج" data-en="Need"></span>
+          <span class="rot"><span id="typed"></span><i class="caret"></i></span>
+          <span data-ar="لشغلك؟" data-en="for your business?"></span>
+          <span class="grad" data-ar="وهج يعملهولك صح." data-en="Wahaj builds it right."></span>
+        </h1>
+        <p class="lead" data-in style="--d:240ms" data-ar="من الفكرة للتشغيل: مواقع، متاجر إلكترونية، أنظمة ERP، تطبيقات، تحليل بيانات وذكاء اصطناعي، ودعم فني على مدار الساعة. قولنا محتاج إيه ونرد عليك على واتساب." data-en="From idea to launch: websites, online stores, ERP systems, apps, data analytics and AI, with round-the-clock support. Tell us what you need and we reply on WhatsApp."></p>
+        <div class="cta" data-in style="--d:360ms">
+          <a class="btn p wa-link" href="#contact" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg><span data-ar="ابعت طلبك على واتساب" data-en="Send your request on WhatsApp"></span></a>
+          <a class="btn g" href="#services"><span data-ar="شوف الخدمات" data-en="Explore services"></span><svg class="ico arr"><use href="#i-arrow"/></svg></a>
+        </div>
+        <div class="mini-badges" data-in style="--d:480ms">
+          <span><svg class="ico"><use href="#i-bolt"/></svg><span data-ar="رد سريع" data-en="Fast reply"></span></span>
+          <span><svg class="ico"><use href="#i-pal"/></svg><span data-ar="تصميم مخصص" data-en="Custom design"></span></span>
+          <span><svg class="ico"><use href="#i-support"/></svg><span data-ar="دعم 24/7" data-en="24/7 support"></span></span>
+        </div>
+      </div>
+      <div class="hv" id="hv" aria-hidden="true" data-in style="--d:300ms">
+        <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+        <div class="win">
+          <div class="win-bar"><i></i><i></i><i></i><span>wahaj.app</span></div>
+          <div class="win-body">
+            <div class="tiles"><div></div><div></div><div></div></div>
+            <svg class="ln" viewBox="0 0 300 110" preserveAspectRatio="none"><path class="area" d="M0 90C30 80 50 100 80 70S130 62 160 55S220 30 250 35S290 15 300 10V110H0Z"/><path class="stroke" pathLength="1" d="M0 90C30 80 50 100 80 70S130 62 160 55S220 30 250 35S290 15 300 10"/></svg>
+            <div class="bars"><b style="--h:40%;--bd:.2s"></b><b style="--h:62%;--bd:.3s"></b><b style="--h:48%;--bd:.4s"></b><b style="--h:78%;--bd:.5s"></b><b style="--h:58%;--bd:.6s"></b><b style="--h:92%;--bd:.7s"></b><b style="--h:70%;--bd:.8s"></b></div>
+          </div>
+        </div>
+        <div class="fl f1"><svg class="ico"><use href="#i-secure"/></svg><span data-ar="آمن" data-en="Secure"></span></div>
+        <div class="fl f2"><svg class="ico"><use href="#i-cloud"/></svg><span>Cloud</span></div>
+        <div class="fl f3"><svg class="ico"><use href="#i-ecom"/></svg><span><span data-ar="طلب جديد" data-en="New order"></span><small>+1</small></span></div>
+        <div class="fl f4"><svg class="ico"><use href="#i-ai"/></svg><span>AI / ML</span></div>
+        <div class="fl f5"><svg class="ico"><use href="#i-support"/></svg><span>24/7</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="mq" aria-hidden="true"><div class="mq-t" id="mq"></div></div>
+
+  <section class="sec" style="padding-block:clamp(40px,6vw,72px) 0">
+    <div class="wrap stats">
+      <div class="stat rv" style="--c:var(--sky-soft);--d:0ms"><strong><span class="cnt" data-to="10">10</span></strong><span data-ar="خدمة متكاملة" data-en="End-to-end services"></span></div>
+      <div class="stat rv" style="--c:var(--mint);--d:90ms"><strong>24/7</strong><span data-ar="دعم ومتابعة" data-en="Support and monitoring"></span></div>
+      <div class="stat rv" style="--c:var(--lilac);--d:180ms"><strong><span class="cnt" data-to="100">100</span>%</strong><span data-ar="تصميم مخصص ليك" data-en="Custom-built for you"></span></div>
+      <div class="stat rv" style="--c:var(--peach);--d:270ms"><strong><span class="cnt" data-to="5">5</span></strong><span data-ar="خطوات من الفكرة للتشغيل" data-en="Steps from idea to launch"></span></div>
+    </div>
+  </section>
+
+  <section class="sec" id="services">
+    <div class="wrap">
+      <div class="sh rv">
+        <span class="eyebrow" data-ar="خدماتنا" data-en="What we build"></span>
+        <h2 data-ar="كل اللي شغلك محتاجه في مكان واحد" data-en="Everything your business needs, in one place"></h2>
+        <p data-ar="اختار الخدمة اللي تناسبك واضغط اطلبها، وهنجهزلك رسالة واتساب جاهزة." data-en="Pick a service and tap Request it. We prepare a ready WhatsApp message for you."></p>
+      </div>
+      <div class="filters rv" id="filters"></div>
+      <div class="grid" id="svc"></div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="process">
+    <div class="wrap">
+      <div class="sh rv">
+        <span class="eyebrow" data-ar="طريقة الشغل" data-en="How we work"></span>
+        <h2 data-ar="خمس خطوات واضحة من أول رسالة لحد الدعم" data-en="Five clear steps, from first message to ongoing support"></h2>
+      </div>
+      <div class="steps" id="steps"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <div class="wrap">
+      <div class="sh rv">
+        <span class="eyebrow" data-ar="أمثلة توضيحية" data-en="Illustrative samples"></span>
+        <h2 data-ar="شكل اللي ممكن نبنيه ليك" data-en="A look at what we can build for you"></h2>
+        <p data-ar="نماذج توضيحية للأفكار، مش مشاريع عملاء. اضغط على أي تبويب تشوفه." data-en="These are illustrative concepts, not client projects. Tap a tab to explore."></p>
+      </div>
+      <div class="tabs rv" id="tabs" role="tablist">
+        <button class="tab on" role="tab" data-p="dash" data-ar="لوحة بيانات" data-en="Dashboard"></button>
+        <button class="tab" role="tab" data-p="shop" data-ar="متجر إلكتروني" data-en="Online store"></button>
+        <button class="tab" role="tab" data-p="app" data-ar="تطبيق موبايل" data-en="Mobile app"></button>
+        <button class="tab" role="tab" data-p="erp" data-ar="نظام ERP" data-en="ERP system"></button>
+      </div>
+      <div class="stage rv" id="stage">
+        <section class="pn" id="p-dash">
+          <div class="mk-h"><span class="dot"></span><span data-ar="لوحة المبيعات" data-en="Sales dashboard"></span><span class="pill" data-ar="مثال" data-en="Sample"></span></div>
+          <div class="g3">
+            <div class="tile"><small data-ar="المبيعات" data-en="Sales"></small><strong><span class="cnt" data-to="128">0</span>K</strong><i>+12%</i></div>
+            <div class="tile"><small data-ar="الطلبات" data-en="Orders"></small><strong><span class="cnt" data-to="342">0</span></strong><i>+8%</i></div>
+            <div class="tile"><small data-ar="عملاء جدد" data-en="New clients"></small><strong><span class="cnt" data-to="56">0</span></strong><i>+21%</i></div>
+          </div>
+          <div class="g2">
+            <div class="box"><svg viewBox="0 0 300 110" preserveAspectRatio="none"><path class="area" d="M0 95C30 85 55 100 85 72S135 66 165 58S225 34 255 38S290 18 300 12V110H0Z"/><path class="stroke" pathLength="1" d="M0 95C30 85 55 100 85 72S135 66 165 58S225 34 255 38S290 18 300 12"/></svg></div>
+            <div class="box"><svg class="dn" viewBox="0 0 42 42"><circle class="bg" r="15.9155" cx="21" cy="21"/><circle class="sg" r="15.9155" cx="21" cy="21" stroke="#45B8EC" stroke-dasharray="52 48"/><circle class="sg" r="15.9155" cx="21" cy="21" stroke="#9ADFCB" stroke-dasharray="26 74" stroke-dashoffset="-52"/><circle class="sg" r="15.9155" cx="21" cy="21" stroke="#C9D3FF" stroke-dasharray="22 78" stroke-dashoffset="-78"/></svg></div>
+          </div>
+        </section>
+        <section class="pn" id="p-shop" hidden>
+          <div class="mk-h"><span class="dot"></span><span data-ar="متجر جاهز للبيع" data-en="A store ready to sell"></span><span class="pill" data-ar="مثال" data-en="Sample"></span></div>
+          <div class="prods">
+            <div class="prod" style="--c:var(--sky-soft);--d:0s"><div class="im"><svg class="ico"><use href="#i-tag"/></svg></div><b data-ar="منتج أول" data-en="Product one"></b><div class="pr"><span>250</span><span class="ad"><svg class="ico"><use href="#i-plus"/></svg></span></div></div>
+            <div class="prod" style="--c:var(--mint);--d:.15s"><div class="im"><svg class="ico"><use href="#i-phone"/></svg></div><b data-ar="منتج تاني" data-en="Product two"></b><div class="pr"><span>1,200</span><span class="ad"><svg class="ico"><use href="#i-plus"/></svg></span></div></div>
+            <div class="prod" style="--c:var(--lilac);--d:.3s"><div class="im"><svg class="ico"><use href="#i-pal"/></svg></div><b data-ar="منتج تالت" data-en="Product three"></b><div class="pr"><span>480</span><span class="ad"><svg class="ico"><use href="#i-plus"/></svg></span></div></div>
+            <div class="prod" style="--c:var(--peach);--d:.45s"><div class="im"><svg class="ico"><use href="#i-ecom"/></svg></div><b data-ar="منتج رابع" data-en="Product four"></b><div class="pr"><span>90</span><span class="ad"><svg class="ico"><use href="#i-plus"/></svg></span></div></div>
+          </div>
+          <div class="cartb"><svg class="ico" style="font-size:1.4rem"><use href="#i-ecom"/></svg><span data-ar="السلة جاهزة للدفع والشحن" data-en="Cart ready for payment and shipping"></span><span class="bd">3</span></div>
+        </section>
+        <section class="pn" id="p-app" hidden>
+          <div class="mk-h"><span class="dot"></span><span data-ar="تطبيق بيشتغل على الموبايل" data-en="An app that lives on the phone"></span><span class="pill" data-ar="مثال" data-en="Sample"></span></div>
+          <div class="phones">
+            <div class="nt" style="--d:.2s"><small data-ar="إشعار" data-en="Notification"></small><span data-ar="طلبك اتأكد" data-en="Your order is confirmed"></span></div>
+            <div class="phone"><div class="hd2"></div><div class="r"><i style="--c:var(--sky-soft)"></i><s></s></div><div class="r"><i style="--c:var(--mint)"></i><s></s></div><div class="r"><i style="--c:var(--lilac)"></i><s></s></div><div class="r"><i style="--c:var(--peach)"></i><s></s></div></div>
+            <div class="nt" style="--d:1.2s"><small data-ar="رسالة" data-en="Message"></small><span data-ar="الدعم متاح 24/7" data-en="Support is online 24/7"></span></div>
+          </div>
+        </section>
+        <section class="pn erp" id="p-erp" hidden>
+          <div class="mk-h"><span class="dot"></span><span data-ar="نظام واحد يربط الشركة كلها" data-en="One system connecting the whole company"></span><span class="pill" data-ar="مثال" data-en="Sample"></span></div>
+          <svg viewBox="0 0 520 280" role="img" aria-label="ERP">
+            <g class="ln2-g"><path class="ln2" d="M260 140L80 50"/><path class="ln2" d="M260 140L440 50"/><path class="ln2" d="M260 140L70 220"/><path class="ln2" d="M260 140L450 220"/><path class="ln2" d="M260 140L260 25"/></g>
+            <circle class="hub" cx="260" cy="140" r="40"/><text class="ht" x="260" y="146">ERP</text>
+            <rect class="nd" x="30" y="30" width="100" height="40" rx="14"/><text x="80" y="55" data-ar="المبيعات" data-en="Sales"></text>
+            <rect class="nd" x="390" y="30" width="100" height="40" rx="14"/><text x="440" y="55" data-ar="المخازن" data-en="Inventory"></text>
+            <rect class="nd" x="20" y="200" width="100" height="40" rx="14"/><text x="70" y="225" data-ar="الحسابات" data-en="Accounts"></text>
+            <rect class="nd" x="400" y="200" width="100" height="40" rx="14"/><text x="450" y="225" data-ar="الموارد البشرية" data-en="HR"></text>
+            <rect class="nd" x="210" y="5" width="100" height="40" rx="14"/><text x="260" y="30" data-ar="التقارير" data-en="Reports"></text>
+          </svg>
+        </section>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="why">
+    <div class="wrap">
+      <div class="sh rv">
+        <span class="eyebrow" data-ar="ليه وهج" data-en="Why Wahaj"></span>
+        <h2 data-ar="شغل متظبط من أول يوم" data-en="Done properly from day one"></h2>
+      </div>
+      <div class="why" id="why-g"></div>
+    </div>
+  </section>
+
+  <section class="sec" id="faq">
+    <div class="wrap">
+      <div class="sh rv">
+        <span class="eyebrow" data-ar="أسئلة شائعة" data-en="FAQ"></span>
+        <h2 data-ar="أسئلة بتتسأل كتير" data-en="Questions we hear often"></h2>
+      </div>
+      <div class="faq" id="faq-g"></div>
+    </div>
+  </section>
+
+  <section class="sec alt" id="contact">
+    <div class="wrap">
+      <div class="sh rv">
+        <span class="eyebrow" data-ar="ابدأ دلوقتي" data-en="Start now"></span>
+        <h2 data-ar="قولنا محتاج إيه ونرد عليك" data-en="Tell us what you need and we will reply"></h2>
+      </div>
+      <div class="ct">
+        <div class="info rv">
+          <div class="orb o1"></div><div class="orb o2"></div>
+          <h2 data-ar="كلمنا على واتساب" data-en="Talk to us on WhatsApp"></h2>
+          <p data-ar="املا الفورم واضغط الزرار، هيفتح واتساب برسالة جاهزة فيها كل تفاصيل طلبك." data-en="Fill in the form and press the button. WhatsApp opens with a ready message holding your request details."></p>
+          <div class="num"><svg class="ico"><use href="#i-wa"/></svg><span id="numtxt"></span><button class="cp" id="cp" type="button" data-ar="نسخ" data-en="Copy"></button></div>
+          <div class="chk">
+            <div><svg class="ico"><use href="#i-check"/></svg><span data-ar="استشارة أولية بدون التزام" data-en="Free first consultation"></span></div>
+            <div><svg class="ico"><use href="#i-check"/></svg><span data-ar="سعر واضح قبل ما نبدأ" data-en="Clear pricing before we start"></span></div>
+            <div><svg class="ico"><use href="#i-check"/></svg><span data-ar="دعم بعد التسليم" data-en="Support after delivery"></span></div>
+          </div>
+        </div>
+        <form class="form rv" id="form" novalidate style="--d:120ms">
+          <div><label class="t" data-ar="محتاج إيه؟ (تقدر تختار أكتر من واحد)" data-en="What do you need? (pick as many as you like)"></label><div class="chips" id="chips"></div></div>
+          <div><label class="t" for="f-name" data-ar="اسمك" data-en="Your name"></label><input class="fld" id="f-name" autocomplete="name" data-ar-ph="اكتب اسمك" data-en-ph="Type your name"></div>
+          <div><label class="t" for="f-when" data-ar="عايزه إمتى؟" data-en="When do you need it?"></label>
+            <select class="fld" id="f-when"><option value="asap" data-ar="في أسرع وقت" data-en="As soon as possible"></option><option value="month" data-ar="خلال شهر" data-en="Within a month"></option><option value="flex" data-ar="مفيش استعجال" data-en="No rush"></option></select></div>
+          <div><label class="t" for="f-det" data-ar="تفاصيل عن فكرتك" data-en="Details about your idea"></label><textarea class="fld" id="f-det" data-ar-ph="اشرح فكرتك باختصار..." data-en-ph="Briefly describe your idea..."></textarea></div>
+          <div class="pv" id="pv"></div>
+          <a class="btn p" id="send" href="#contact" target="_blank" rel="noopener"><svg class="ico"><use href="#i-wa"/></svg><span data-ar="ابعت على واتساب" data-en="Send on WhatsApp"></span></a>
+          <p class="hint" data-ar="الزرار بيفتح واتساب برسالة جاهزة، وإنت اللي بتبعتها." data-en="The button opens WhatsApp with a ready message, and you press send."></p>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="ft">
+  <div class="wrap">
+    <a class="logo" href="#home"><svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l8 26 7-16 7 16 8-22"/><path d="M36 9l2 4 4 1-4 1.5-2 4-1.6-4-4-1.5 4-1z" stroke-width="2" fill="#8AD4F4"/></svg><span><b data-ar="وهج" data-en="WAHAJ"></b><small>Software Solutions</small></span></a>
+    <p>© 2026 Wahaj Software Solutions</p>
+    <button class="btn g sm" id="share" type="button"><svg class="ico"><use href="#i-share"/></svg><span data-ar="انسخ لينك الموقع" data-en="Copy site link"></span></button>
+  </div>
+</footer>
+
+<a class="wa wa-link" id="fwa" href="#contact" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="ico"><use href="#i-wa"/></svg></a>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(function(){
+document.documentElement.classList.add('js');
+/* Replace with the real WhatsApp number: country code + number, digits only */
+var WA_NUMBER='+201044946271';
+var $=function(s,r){return(r||document).querySelector(s)};
+var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var reduce=window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
+var fine=window.matchMedia&&matchMedia('(hover:hover) and (pointer:fine)').matches;
+var lang='ar';
+try{var sv=localStorage.getItem('wahaj-lang');if(sv==='en'||sv==='ar')lang=sv}catch(e){}
+
+var SERVICES=[
+ {k:'core',g:'systems',t:'--sky-soft',ar:['بناء الأنظمة الأساسية','أنظمة مخصصة بتشغّل شغلك من جوه: حسابات ومخزون وعملاء وتقارير في مكان واحد.'],en:['Core systems','Custom systems that run your business from the inside: accounts, stock, clients and reports in one place.']},
+ {k:'web',g:'web',t:'--mint',ar:['مواقع ومنصات ويب','مواقع سريعة وشكلها يخطف العين، وبتشتغل صح على الموبايل واللاب.'],en:['Web platforms','Fast, eye-catching websites that work properly on phones and laptops.']},
+ {k:'uiux',g:'web',t:'--lilac',ar:['تصميم واجهات UI/UX','واجهات سهلة وجميلة، العميل يفهمها من أول لمسة.'],en:['UI/UX design','Easy, beautiful interfaces your customer understands from the first tap.']},
+ {k:'erp',g:'systems',t:'--peach',ar:['أنظمة ERP للشركات','نظام واحد يربط المبيعات والمخازن والحسابات والموارد البشرية.'],en:['ERP for companies','One system tying sales, stock, accounting and HR together.']},
+ {k:'secure',g:'data',t:'--sky-soft',ar:['حلول بيانات آمنة','تشفير وصلاحيات ونسخ احتياطي، عشان بياناتك تفضل في إيدك.'],en:['Secure data','Encryption, permissions and backups, so your data stays in your hands.']},
+ {k:'analytics',g:'data',t:'--mint',ar:['تحليلات بيانات','لوحات تحكم ورسوم بيانية بتوضح الأرقام وتساعدك تاخد قرارك.'],en:['Data analytics','Dashboards and charts that make numbers clear and decisions easier.']},
+ {k:'ecom',g:'web',t:'--lilac',ar:['منصات تجارة إلكترونية','متجر بسلة ودفع وشحن، جاهز يبيع من أول يوم.'],en:['E-commerce platforms','A store with cart, payment and shipping, ready to sell from day one.']},
+ {k:'cloud',g:'data',t:'--peach',ar:['أنظمة سحابية قابلة للتوسع','شغلك يكبر والسيستم يكبر معاه، من غير بطء ولا توقف.'],en:['Scalable cloud systems','Your business grows and the system grows with it, with no slowdowns.']},
+ {k:'ai',g:'data',t:'--sky-soft',ar:['حلول ذكاء اصطناعي','شات بوت وتوقعات وأتمتة لمهام بتتكرر، توفر وقت وفلوس.'],en:['AI solutions','Chatbots, forecasting and automation for repeated tasks, saving time and money.']},
+ {k:'support',g:'systems',t:'--mint',ar:['صيانة ودعم 24/7','فريق جاهز يتابع ويصلّح ويحدّث، في أي وقت.'],en:['24/7 maintenance and support','A team ready to monitor, fix and update at any hour.']}
+];
+var GROUPS=[{k:'all',ar:'الكل',en:'All'},{k:'web',ar:'مواقع ومتاجر',en:'Web and stores'},{k:'systems',ar:'أنظمة',en:'Systems'},{k:'data',ar:'بيانات وسحابة وذكاء',en:'Data, cloud and AI'}];
+var STEPS=[
+ {ar:['نتكلم ونفهم','نسمع فكرتك ونحدد المطلوب والميزانية.'],en:['We talk','We listen to your idea and define scope and budget.']},
+ {ar:['نصمّم','نوريك شكل الشغل قبل ما نبرمج.'],en:['We design','You see how it will look before we code.']},
+ {ar:['نبني','نبرمج بخطوات ونعرض عليك التقدم.'],en:['We build','We code in stages and show progress as we go.']},
+ {ar:['نختبر ونطلق','نجرّب على كل الأجهزة ونشغّل.'],en:['Test and launch','We test on every device, then go live.']},
+ {ar:['نتابع ونطوّر','دعم وتحديثات بعد الإطلاق.'],en:['Support and grow','Support and updates after launch.']}
+];
+var WHY=[
+ {i:'bolt',t:'--sky-soft',ar:['رد سريع','بنرد على طلبك بسرعة وبنوضح الخطوات من الأول.'],en:['Quick replies','We answer fast and explain the steps up front.']},
+ {i:'pal',t:'--mint',ar:['تصميم مخصص','مفيش قوالب جاهزة، كل مشروع بيتصمم على قد شغلك.'],en:['Custom design','No off-the-shelf templates; each project is made for your business.']},
+ {i:'phone',t:'--lilac',ar:['متجاوب مع كل الشاشات','موبايل وتابلت ولاب، كلهم بيظهروا تمام.'],en:['Works on every screen','Phone, tablet and laptop all look right.']},
+ {i:'secure',t:'--peach',ar:['أمان من أول سطر','حماية للبيانات والصلاحيات من بداية المشروع.'],en:['Security from line one','Data and access protection from the start of the project.']},
+ {i:'tag',t:'--sky-soft',ar:['سعر واضح','بنتفق على التكلفة قبل ما نبدأ.'],en:['Clear pricing','We agree on the cost before we begin.']},
+ {i:'support',t:'--mint',ar:['دعم بعد التسليم','صيانة وتحديثات ودعم على مدار الساعة.'],en:['Support after delivery','Maintenance, updates and round-the-clock help.']}
+];
+var FAQ=[
+ {ar:['أبدأ إزاي؟','ابعت طلبك على واتساب أو املا الفورم اللي فوق. هنفهم احتياجك ونرجعلك بخطة وسعر.'],en:['How do I start?','Send your request on WhatsApp or fill in the form above. We learn what you need and come back with a plan and a price.']},
+ {ar:['المشروع بياخد وقت قد إيه؟','بيختلف حسب المشروع. موقع تعريفي أسرع كتير من نظام ERP. بنحدد جدول واضح قبل البدء.'],en:['How long does a project take?','It depends on the project. A company website is much quicker than an ERP system. We set a clear schedule before starting.']},
+ {ar:['الموقع هيشتغل على الموبايل؟','أكيد. كل حاجة بنصممها بتشتغل على الموبايل والتابلت واللاب.'],en:['Will it work on mobile?','Yes. Everything we design works on phones, tablets and laptops.']},
+ {ar:['في دعم بعد التسليم؟','أيوه، بنقدم صيانة ودعم وتحديثات على مدار الساعة.'],en:['Is there support after delivery?','Yes, we offer maintenance, support and updates around the clock.']},
+ {ar:['عندي نظام قديم، ينفع تطوّروه؟','ينفع. بنراجعه ونقترح تحسينه أو إعادة بنائه حسب الأنسب ليك.'],en:['Can you improve my existing system?','Yes. We review it and suggest improving it or rebuilding it, whichever suits you best.']}
+];
+var TECH=['React','Node.js','Python','Flutter','PostgreSQL','AWS','Docker','Figma','TensorFlow','Laravel','TypeScript','Firebase'];
+
+/* build static lists */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;')}
+function dual(tag,cls,a,b,extra){return '<'+tag+(cls?' class="'+cls+'"':'')+(extra||'')+' data-ar="'+esc(a)+'" data-en="'+esc(b)+'"></'+tag+'>'}
+$('#filters').innerHTML=GROUPS.map(function(g,i){return '<button class="fb'+(i?'':' on')+'" type="button" data-g="'+g.k+'" data-ar="'+g.ar+'" data-en="'+g.en+'"></button>'}).join('');
+$('#svc').innerHTML=SERVICES.map(function(s,i){return '<div class="cw rv" data-g="'+s.g+'" style="--d:'+(i%3*90)+'ms"><article class="card" style="--t:var('+s.t+')"><div class="ic"><svg class="ico"><use href="#i-'+s.k+'"/></svg></div>'+dual('h3','',s.ar[0],s.en[0])+dual('p','',s.ar[1],s.en[1])+'<button class="pick" type="button" data-k="'+s.k+'"><span data-ar="اطلب الخدمة" data-en="Request it"></span><svg class="ico arr"><use href="#i-arrow"/></svg></button></article></div>'}).join('');
+$('#steps').innerHTML=STEPS.map(function(s,i){return '<div class="st rv" style="--d:'+(i*140)+'ms"><div class="n">'+(i+1)+'</div>'+dual('h3','',s.ar[0],s.en[0])+dual('p','',s.ar[1],s.en[1])+'</div>'}).join('');
+$('#why-g').innerHTML=WHY.map(function(w,i){return '<div class="wy rv" style="--d:'+(i%3*90)+'ms"><div class="ic" style="--t:var('+w.t+')"><svg class="ico"><use href="#i-'+w.i+'"/></svg></div><div>'+dual('h3','',w.ar[0],w.en[0])+dual('p','',w.ar[1],w.en[1])+'</div></div>'}).join('');
+$('#faq-g').innerHTML=FAQ.map(function(f,i){return '<div class="qa rv" style="--d:'+(i*70)+'ms"><button type="button" aria-expanded="false">'+dual('span','',f.ar[0],f.en[0])+'<span class="pl"><svg class="ico" style="font-size:1rem"><use href="#i-plus"/></svg></span></button><div class="an"><div>'+dual('p','',f.ar[1],f.en[1])+'</div></div></div>'}).join('');
+$('#chips').innerHTML=SERVICES.map(function(s){return '<button class="chip" type="button" aria-pressed="false" data-k="'+s.k+'" data-ar="'+esc(s.ar[0])+'" data-en="'+esc(s.en[0])+'"></button>'}).join('');
+var tt=TECH.concat(TECH).map(function(t){return '<span>'+t+'</span>'}).join('');
+$('#mq').innerHTML=tt;
+
+/* language */
+function applyLang(){
+  var d=document.documentElement;
+  d.lang=lang;d.dir=lang==='ar'?'rtl':'ltr';
+  $$('[data-ar]').forEach(function(e){var v=e.getAttribute('data-'+lang);if(v!==null)e.textContent=v});
+  $$('[data-ar-ph]').forEach(function(e){e.placeholder=e.getAttribute('data-'+lang+'-ph')});
+  $('#lang').textContent=lang==='ar'?'EN':'عربي';
+  $('#lang').setAttribute('aria-label',lang==='ar'?'Switch to English':'التبديل للعربي');
+  $('#numtxt').textContent='+'+WA_NUMBER.replace(/(\d{2})(\d{3})(\d{3})(\d+)/,'$1 $2 $3 $4');
+  typeReset();buildMsg();
+}
+function toast(t){var e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(toast.h);toast.h=setTimeout(function(){e.classList.remove('on')},2200)}
+
+/* WhatsApp */
+function wa(msg){return 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg)}
+function greet(){return lang==='ar'?'  السلام عليكم عايز أستفسر عن خدماتكم.و الاسعار و الباقات الموجوده':'Hello, I would like to ask about your services.'}
+function selected(){return $$('.chip[aria-pressed="true"]').map(function(c){return c.getAttribute('data-'+lang)})}
+function buildMsg(){
+  var name=$('#f-name').value.trim(),det=$('#f-det').value.trim();
+  var wsel=$('#f-when'),when=wsel.options[wsel.selectedIndex].getAttribute('data-'+lang);
+  var sv=selected(),m;
+  if(lang==='ar'){m='السلام عليكم، أنا '+(name||'...')+'.\nمحتاج: '+(sv.length?sv.join('، '):'استشارة')+'.\nالتوقيت: '+when+'.'+(det?'\nالتفاصيل: '+det:'')+'\n(من موقع وهج)'}
+  else{m='Hello, I am '+(name||'...')+'.\nI need: '+(sv.length?sv.join(', '):'a consultation')+'.\nTiming: '+when+'.'+(det?'\nDetails: '+det:'')+'\n(From the Wahaj website)'}
+  $('#pv').textContent=m;$('#send').href=wa(m);
+  $$('.wa-link').forEach(function(a){a.href=wa(greet())});
+  return m;
+}
+
+/* typewriter */
+var WORDS={ar:['موقع احترافي','متجر إلكتروني','نظام إدارة ERP','تطبيق موبايل','لوحة تحليل بيانات','حل بالذكاء الاصطناعي'],en:['a professional website','an online store','an ERP system','a mobile app','a data dashboard','an AI solution']};
+var wi=0,ci=0,del=false,tm;
+function typeReset(){clearTimeout(tm);wi=0;ci=0;del=false;if(reduce){$('#typed').textContent=WORDS[lang][0];return}tick()}
+function tick(){
+  var w=WORDS[lang][wi%WORDS[lang].length],el=$('#typed');
+  if(!del){ci++;el.textContent=w.slice(0,ci);if(ci===w.length){del=true;tm=setTimeout(tick,1700);return}tm=setTimeout(tick,70)}
+  else{ci--;el.textContent=w.slice(0,ci);if(ci===0){del=false;wi++;tm=setTimeout(tick,300);return}tm=setTimeout(tick,35)}
+}
+
+/* counters */
+function countUp(el){
+  var to=+el.getAttribute('data-to');
+  if(reduce){el.textContent=to;return}
+  var t0=performance.now(),dur=1400;
+  (function f(t){var p=Math.min(1,(t-t0)/dur);el.textContent=Math.round(to*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(t0);
+}
+
+/* reveal */
+var io=null;
+if('IntersectionObserver' in window&&!reduce){
+  io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);$$('.cnt',e.target).forEach(countUp)}})},{threshold:.12,rootMargin:'0px 0px -5% 0px'});
+  $$('.rv').forEach(function(e){io.observe(e)});
+}else{$$('.rv').forEach(function(e){e.classList.add('in')});$$('.cnt').forEach(function(e){e.textContent=e.getAttribute('data-to')})}
+
+/* header, progress, menu */
+var bar=$('#bar'),ticking=false;
+function onScroll(){
+  if(ticking)return;ticking=true;
+  requestAnimationFrame(function(){
+    var h=document.documentElement,max=h.scrollHeight-h.clientHeight;
+    bar.style.setProperty('--sp',max>0?Math.min(1,h.scrollTop/max):0);ticking=false;
+  });
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+$('#burger').addEventListener('click',function(){var o=$('#nav').classList.toggle('open');this.setAttribute('aria-expanded',o)});
+$$('#nav a').forEach(function(a){a.addEventListener('click',function(){$('#nav').classList.remove('open');$('#burger').setAttribute('aria-expanded','false')})});
+$('#lang').addEventListener('click',function(){lang=lang==='ar'?'en':'ar';try{localStorage.setItem('wahaj-lang',lang)}catch(e){}applyLang()});
+
+/* filters */
+$('#filters').addEventListener('click',function(e){
+  var b=e.target.closest('.fb');if(!b)return;
+  $$('.fb').forEach(function(x){x.classList.toggle('on',x===b)});
+  var g=b.getAttribute('data-g'),i=0;
+  $$('#svc .cw').forEach(function(c){var show=g==='all'||c.getAttribute('data-g')===g;c.hidden=!show;if(show){c.classList.add('in');c.classList.remove('pp');void c.offsetWidth;c.classList.add('pp');c.style.animationDelay=(i++*70)+'ms'}});
+});
+
+/* pick service -> contact */
+$('#svc').addEventListener('click',function(e){
+  var b=e.target.closest('.pick');if(!b)return;
+  var c=$('.chip[data-k="'+b.getAttribute('data-k')+'"]');
+  if(c)c.setAttribute('aria-pressed','true');buildMsg();
+  $('#contact').scrollIntoView({behavior:reduce?'auto':'smooth'});
+  toast(lang==='ar'?'تمت إضافة الخدمة لطلبك':'Service added to your request');
+});
+$('#chips').addEventListener('click',function(e){var c=e.target.closest('.chip');if(!c)return;c.setAttribute('aria-pressed',c.getAttribute('aria-pressed')==='true'?'false':'true');buildMsg()});
+['f-name','f-det','f-when'].forEach(function(id){$('#'+id).addEventListener('input',buildMsg);$('#'+id).addEventListener('change',buildMsg)});
+$('#form').addEventListener('submit',function(e){e.preventDefault()});
+$('#send').addEventListener('click',function(e){
+  var n=$('#f-name');
+  if(!n.value.trim()){e.preventDefault();n.classList.remove('bad');void n.offsetWidth;n.classList.add('bad');n.focus();toast(lang==='ar'?'اكتب اسمك الأول':'Please type your name first')}
+});
+$('#f-name').addEventListener('input',function(){this.classList.remove('bad')});
+
+/* copy */
+function copyText(txt,done){
+  function fallback(){var r=document.createRange(),n=$('#numtxt');r.selectNodeContents(n);var s=getSelection();s.removeAllRanges();s.addRange(r)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(txt).then(done,function(){fallback()})}else fallback();
+}
+$('#cp').addEventListener('click',function(){copyText('+'+WA_NUMBER,function(){toast(lang==='ar'?'تم نسخ الرقم':'Number copied')})});
+$('#share').addEventListener('click',function(){
+  var u=location.href;
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){toast(lang==='ar'?'تم نسخ لينك الموقع':'Site link copied')},function(){toast(u)})}else toast(u);
+});
+
+/* faq */
+$('#faq-g').addEventListener('click',function(e){
+  var b=e.target.closest('.qa>button');if(!b)return;
+  var q=b.parentNode,on=!q.classList.contains('on');
+  $$('.qa').forEach(function(x){x.classList.remove('on');x.firstChild.setAttribute('aria-expanded','false')});
+  if(on){q.classList.add('on');b.setAttribute('aria-expanded','true')}
+});
+$$('.qa')[0].classList.add('on');$$('.qa')[0].firstChild.setAttribute('aria-expanded','true');
+
+/* showcase tabs */
+var order=['dash','shop','app','erp'];
+function showTab(k){
+  $$('.tab').forEach(function(t){var on=t.getAttribute('data-p')===k;t.classList.remove('on');if(on){void t.offsetWidth;t.classList.add('on')}t.setAttribute('aria-selected',on)});
+  $$('.pn').forEach(function(p){p.hidden=p.id!=='p-'+k});
+  $$('#p-'+k+' .cnt').forEach(countUp);
+}
+$('#tabs').addEventListener('click',function(e){var t=e.target.closest('.tab');if(t)showTab(t.getAttribute('data-p'))});
+$('#tabs').addEventListener('animationend',function(e){
+  if(e.animationName!=='fill')return;
+  var cur=$('.tab.on').getAttribute('data-p');showTab(order[(order.indexOf(cur)+1)%order.length]);
+});
+$$('#p-dash .cnt').forEach(function(e){e.textContent=e.getAttribute('data-to')});
+
+/* pointer effects */
+if(fine&&!reduce){
+  var hv=$('#hv'),hero=$('.hero');
+  hero.addEventListener('pointermove',function(e){
+    var r=hero.getBoundingClientRect();
+    hero.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');
+    hero.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');
+    var b=hv.getBoundingClientRect();
+    hv.style.setProperty('--px',Math.max(-1,Math.min(1,(e.clientX-b.left-b.width/2)/(b.width/2))).toFixed(2));
+    hv.style.setProperty('--py',Math.max(-1,Math.min(1,(e.clientY-b.top-b.height/2)/(b.height/2))).toFixed(2));
+  });
+  $('#svc').addEventListener('pointermove',function(e){
+    var c=e.target.closest('.card');if(!c)return;
+    var r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    c.style.setProperty('--ry',(x*10).toFixed(1)+'deg');c.style.setProperty('--rx',(-y*10).toFixed(1)+'deg');
+  });
+  $('#svc').addEventListener('pointerout',function(e){var c=e.target.closest('.card');if(c){c.style.setProperty('--rx','0deg');c.style.setProperty('--ry','0deg')}});
+}
+
+/* sparkles */
+function sparkles(id,n){
+  var box=$(id);if(!box||reduce)return;var h='';
+  for(var i=0;i<n;i++){h+='<i style="left:'+(Math.random()*100).toFixed(1)+'%;top:'+(Math.random()*100).toFixed(1)+'%;--s:'+(6+Math.random()*12).toFixed(0)+'px;--t:'+(3+Math.random()*4).toFixed(1)+'s;--dl:'+(Math.random()*5).toFixed(1)+'s"></i>'}
+  box.innerHTML=h;
+}
+sparkles('#sp1',22);
+
+applyLang();
+onScroll();
+})();
+</script>
+
+</body></html>
